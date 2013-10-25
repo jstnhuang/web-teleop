@@ -1,0 +1,20 @@
+body {
+  margin: 0px;
+}
+
+#mjpeg canvas {
+  margin: 0px auto;
+}
+
+#controls {
+  background-color: white;
+  bottom: 0px;
+  padding: 5px;
+  position: fixed;
+  width: 100%;
+}
+
+#controls #layouts {
+  margin: 0px auto;
+  width: 450px;
+}

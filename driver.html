@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    <script type="text/javascript" src="http://cdn.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
+    <script type="text/javascript" src="http://cdn.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
+    <script type="text/javascript" src="http://cdn.robotwebtools.org/mjpegcanvasjs/current/mjpegcanvas.min.js"></script>
+
+    <script type="text/javascript" src="js/base-controller.js"></script>
+    <script type="text/javascript" src="js/head-controller.js"></script>
+    <script type="text/javascript" src="js/teleop.js"></script>
+
+    <script type="text/javascript" src="js/driver-ui.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        driverUi.init()
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="css/driver.css" />
+  </head>
+  
+  <body>
+    <div id="mjpeg"></div>
+    <div id="controls">
+      <div id="layouts">
+        <img src="img/base-layout.png" />
+        <img src="img/head-layout.png" />
+      </div>
+    </div>
+  </body>
+</html>
