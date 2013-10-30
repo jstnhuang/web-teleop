@@ -15,3 +15,10 @@ To bring up the depth cloud:
 2. `roslaunch openni_launch openni.launch depth_registration:=true`
 3. `rosrun ros_web_video ros_web_video _port:=9999 _framerate:=15 _bitrate:=250000 _profile:=best www_file_server:=true _wwwroot:=/path/to/wwwroot/`
 4. `rosrun depthcloud_encoder depthcloud_ender_node _depth:=/head_mount_kinect_rgb/depth/image_raw _rgb:=/head_mount_kinect/rgb/image_raw`
+
+To bring up the PR2 URDF:
+ 
+1. `roslaunch pr2_description upload_pr2.launch`
+2. `rosrun robot_state_publisher robot_state_publisher`
+3. `rosparam set use_gui true`
+4. `rosrun joint_state_publisher joint_state_publisher`
