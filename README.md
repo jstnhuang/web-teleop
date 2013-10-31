@@ -22,3 +22,9 @@ To bring up the PR2 URDF:
 2. `rosrun robot_state_publisher robot_state_publisher`
 3. `rosparam set use_gui true`
 4. `rosrun joint_state_publisher joint_state_publisher`
+
+(Unfinished) To bring up the interactive markers:
+
+1. `roslaunch ik_sample ik_servers.launch`
+2. `rosrun ik_sample gripper_markers.py`
+1. `rosrun interactive_marker_proxy proxy pic_ns:=/ik_request_markers_l target_frame:=/base_link`

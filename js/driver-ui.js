@@ -38,7 +38,7 @@
       host : 'localhost',
       width : viewerDimensions.width,
       height : viewerDimensions.height,
-      topics : ['/wide_stereo/left/image_color'],
+      topics : ['/head_mount_kinect/rgb/image_rect_color'],
       labels : ['Robot View']
     });
   
