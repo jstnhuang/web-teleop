@@ -1,4 +1,4 @@
-(function(baseController) {
+(function(baseModel) {
   var cmdVel;
 
   function genTwist(ax, ay, az, lx, ly, lz) {
@@ -16,7 +16,7 @@
     });
   }
 
-  baseController.init = function(ros, topic) {
+  baseModel.init = function(ros, topic) {
     cmdVel = new ROSLIB.Topic({
       ros: ros,
       name: topic,
@@ -24,38 +24,38 @@
     });
   }
 
-  baseController.stop = function() {
+  baseModel.stop = function() {
     var twist = genTwist(0, 0, 0, 0, 0, 0);
     cmdVel.publish(twist);
   }
 
-  baseController.moveForward = function(speed) {
+  baseModel.moveForward = function(speed) {
     var twist = genTwist(0, 0, 0, speed, 0, 0);
     cmdVel.publish(twist);
   }
 
-  baseController.moveBackward = function(speed) {
+  baseModel.moveBackward = function(speed) {
     var twist = genTwist(0, 0, 0, -speed, 0, 0);
     cmdVel.publish(twist);
   }
 
-  baseController.moveLeft = function(speed) {
+  baseModel.moveLeft = function(speed) {
     var twist = genTwist(0, 0, 0, 0, speed, 0);
     cmdVel.publish(twist);
   }
 
-  baseController.moveRight = function(speed) {
+  baseModel.moveRight = function(speed) {
     var twist = genTwist(0, 0, 0, 0, -speed, 0);
     cmdVel.publish(twist);
   }
 
-  baseController.rotateClockwise = function(speed) {
+  baseModel.rotateClockwise = function(speed) {
     var twist = genTwist(0, 0, -speed, 0, 0, -speed);
     cmdVel.publish(twist);
   }
 
-  baseController.rotateCounterClockwise = function(speed) {
+  baseModel.rotateCounterClockwise = function(speed) {
     var twist = genTwist(0, 0, speed, 0, 0, speed);
     cmdVel.publish(twist);
   }
-} (window.baseController=window.baseController || {}));
+} (window.baseModel=window.baseModel || {}));

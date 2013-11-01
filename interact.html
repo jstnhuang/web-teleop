@@ -1,76 +1,27 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8" />
-
-<script type="text/javascript" src="http://cdn.robotwebtools.org/threejs/current/three.min.js"></script>
-<script src="http://cdn.robotwebtools.org/ColladaAnimationCompress/current/ColladaLoader2.min.js"></script>
-<script type="text/javascript" src="http://cdn.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
-<script type="text/javascript" src="http://cdn.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
-<script type="text/javascript" src="http://cdn.robotwebtools.org/ros3djs/current/ros3d.min.js"></script>
-
-<script type="text/javascript" type="text/javascript">
-  /**
-   * Setup all visualization elements when the page is loaded.
-   */
-  function init() {
-    // Connect to ROS.
-    var ros = new ROSLIB.Ros({
-      url : 'ws://localhost:9090'
-    });
-
-    // Create the main viewer.
-    var viewer = new ROS3D.Viewer({
-      divID : 'viewer',
-      width : 800,
-      height : 600,
-      antialias : true
-    });
-    viewer.addObject(new ROS3D.Grid());
-  
-    // Setup a client to listen to TFs.
-    var tfClient = new ROSLIB.TFClient({
-      ros: ros,
-      angularThres: 0.01,
-      transThres: 0.01,
-      rate: 10.0,
-      fixedFrame: '/base_link'
-    });
-
-    var urdfClient = new ROS3D.UrdfClient({
-      ros: ros,
-      tfClient: tfClient,
-      path: 'http://resources.robotwebtools.org/',
-      rootObject: viewer.scene
-    });
-
-    var imClient = new ROS3D.InteractiveMarkerClient({
-      ros: ros,
-      tfClient: tfClient,
-      topic: '/ik_request_markers_l',
-      camera: viewer.camera,
-      rootObject: viewer.selectableObjects
-    });
-
-    // Setup Kinect DepthCloud stream
-    depthCloud = new ROS3D.DepthCloud({
-      url : 'http://'+window.location.hostname + ':9999/streams/depthcloud_encoded.webm',
-      f : 525.0
-    });
-    depthCloud.startStream();
-
-    // Create Kinect scene node
-    var kinectNode = new ROS3D.SceneNode({
-      frameID: '/head_mount_kinect_rgb_optical_frame',
-      tfClient: tfClient,
-      object: depthCloud
-    });
-    viewer.scene.add(kinectNode);
-  }
-</script>
-</head>
-
-<body onload="init()">
-  <div id="viewer"></div>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="js/rwt/three.js"></script>
+    <script type="text/javascript" src="js/rwt/ColladaLoader2.js"></script>
+    <script type="text/javascript" src="js/rwt/eventemitter2.js"></script>
+    <script type="text/javascript" src="js/rwt/roslib.js"></script>
+    <script type="text/javascript" src="js/rwt/ros3d.js"></script>
+    <script type="text/javascript" src="js/models/base.js"></script>
+    <script type="text/javascript" src="js/models/head.js"></script>
+    <script type="text/javascript" src="js/controllers/teleop.js"></script>
+    <script type="text/javascript" src="js/views/interact.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        interactView.init({
+          viewerId: 'viewer'
+        })
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="css/webteleop.css" />
+  </head>
+  <body>
+    <div id="viewer"></div>
+  </body>
 </html>

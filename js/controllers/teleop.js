@@ -6,40 +6,39 @@ KEYBOARDTELEOP.Teleop = function(options) {
   options = options || {};
   var ros = options.ros;
   var baseTopic = options.baseTopic || '/cmd_vel';
-  var viewer = '#' + (options.viewerId || 'mjpeg')
   var speed = options.speed || 1
-  var that = this;
 
-  baseController.init(ros, baseTopic);
-  headController.init(ros);
+  baseModel.init(ros, baseTopic);
+  headModel.init(ros);
  
   function handleKeyDown(keyDownEvent) {
     var baseSpeed = 1;
     var headSpeed = 0.01;
     var baseBindings = {
-      'W': baseController.moveForward,
-      'A': baseController.moveLeft,
-      'S': baseController.moveBackward,
-      'D': baseController.moveRight,
-      'Q': baseController.rotateCounterClockwise,
-      'E': baseController.rotateClockwise,
+      'W': baseModel.moveForward,
+      'A': baseModel.moveLeft,
+      'S': baseModel.moveBackward,
+      'D': baseModel.moveRight,
+      'Q': baseModel.rotateCounterClockwise,
+      'E': baseModel.rotateClockwise,
     }
     var headBindings = {
-      'I': headController.lookUp,
-      'J': headController.lookLeft,
-      'K': headController.lookDown,
-      'L': headController.lookRight
+      'I': headModel.lookUp,
+      'J': headModel.lookLeft,
+      'K': headModel.lookDown,
+      'L': headModel.lookRight
     }
     var key = String.fromCharCode(keyDownEvent.keyCode);
     if (baseBindings.hasOwnProperty(key)) {
       baseBindings[key](baseSpeed);
-    } else {
+    } else if (headBindings.hasOwnProperty(key)) {
       headBindings[key](headSpeed);
+    } else {
     }
   }
 
   function handleKeyUp(keyUpEvent) {
-    baseController.stop();
+    baseModel.stop();
   }
 
   var body = $('body');

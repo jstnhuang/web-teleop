@@ -1,4 +1,4 @@
-(function(headController) {
+(function(headModel) {
   var actionClient;
   var pan = 0;
   var tilt = 1;
@@ -21,34 +21,34 @@
     });
   }
 
-  headController.init = function(ros) {
+  headModel.init = function(ros) {
     actionClient = new ROSLIB.ActionClient({
       ros: ros,
-      serverName : '/head_traj_controller/point_head_action',
-      actionName : 'pr2_controllers_msgs/PointHeadAction'
+      serverName: '/head_traj_controller/point_head_action',
+      actionName: 'pr2_controllers_msgs/PointHeadAction'
     });
   }
 
-  headController.stop = function() {
+  headModel.stop = function() {
   }
 
-  headController.lookUp = function(speed) {
+  headModel.lookUp = function(speed) {
     tilt += speed;
     genGoal().send();
   }
 
-  headController.lookDown = function(speed) {
+  headModel.lookDown = function(speed) {
     tilt -= speed;
     genGoal().send();
   }
 
-  headController.lookLeft = function(speed) {
+  headModel.lookLeft = function(speed) {
     pan += speed;
     genGoal().send();
   }
 
-  headController.lookRight = function(speed) {
+  headModel.lookRight = function(speed) {
     pan -= speed;
     genGoal().send();
   }
-} (window.headController=window.headController || {}));
+} (window.headModel=window.headModel || {}));
